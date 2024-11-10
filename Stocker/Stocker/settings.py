@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
     # Django Apps
     'core',
-    'account',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -140,6 +140,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #? ----------------------------------------------------------------------------------------------------
 #? Custom Settings
 #? ----------------------------------------------------------------------------------------------------
+
+# Django Auth Model
+AUTH_USER_MODEL = "accounts.User"
 
 # Django-Restframework Configuration
 REST_FRAMEWORK = {

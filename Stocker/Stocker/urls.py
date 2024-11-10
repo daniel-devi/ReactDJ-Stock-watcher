@@ -27,7 +27,7 @@ urlpatterns = [
     path('api/', include('core.urls')),
 
     # Account App URL Endpoint
-    path('account/', include('account.urls')),
+    path('account/', include('accounts.urls')),
 
     # Login Endpoint
     path('login/', TokenObtainPairView.as_view(), name='login'),
