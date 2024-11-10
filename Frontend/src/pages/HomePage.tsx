@@ -7,7 +7,6 @@ import FAQ from "../components/Homepage/FAQ";
 function HomePage() {
   return (
     <>
-      <h1>Home Page</h1>
       <div className="bg-indigo-50">
         <Header />
         <Hero />

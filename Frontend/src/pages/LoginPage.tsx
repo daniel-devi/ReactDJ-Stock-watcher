@@ -15,7 +15,7 @@ import { ThemeProvider } from "@mui/material/styles";
 // Custom components
 import ForgotPassword from "../components/ForgotPasswordForm";
 import { GoogleIcon } from "../components/CustomIcons";
-import { theme } from "../AppTheme";
+import { theme } from "../utils/AppTheme";
 // Functions
 import {
   fetchUsername,
