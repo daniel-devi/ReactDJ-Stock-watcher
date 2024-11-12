@@ -25,7 +25,6 @@ import {
 } from "../utils/LoginPage";
 import { useNavigate } from "react-router-dom";
 
-
 export default function LoginPage() {
   // State hooks for email and password validation
   const [emailError, setEmailError] = useState(false);
@@ -78,7 +77,7 @@ export default function LoginPage() {
 
       // Redirect to the home page
       navigate("/");
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.status === 401) {
         setEmailError(true);
         setPasswordError(true);
@@ -86,7 +85,8 @@ export default function LoginPage() {
       }
       console.error(error);
     }
-  };    /**
+  };
+  /**
    * Handles form submission
    * @param {React.FormEvent<HTMLFormElement>} event - The form submission event
    */
@@ -117,129 +117,131 @@ export default function LoginPage() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Stack
-        direction="column"
-        justifyContent="space-between"
-        sx={{
-          minHeight: "100%",
-          padding: { xs: 2, sm: 4 },
-          "&::before": {
-            content: '""',
-            display: "block",
-            position: "absolute",
-            zIndex: -1,
-            inset: 0,
-            backgroundImage:
-              "radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))",
-            backgroundRepeat: "no-repeat",
-          },
-        }}
-      >
-        <Card variant="outlined">
-          <Typography
-            component="h1"
-            variant="h4"
-            sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
-          >
-            Sign in
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-              gap: 2,
-            }}
-          >
-            {/* Email input field */}
-            <FormControl>
-              <FormLabel htmlFor="email">Email</FormLabel>
-              <TextField
-                value={email}
-                error={emailError}
-                helperText={emailErrorMessage}
-                id="email"
-                type="email"
-                name="email"
-                placeholder="your@email.com"
-                autoComplete="email"
-                autoFocus
-                required
-                fullWidth
-                variant="outlined"
-                color={emailError ? "error" : "primary"}
-                sx={{ ariaLabel: "email" }}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FormControl>
-            {/* Password input field */}
-            <FormControl>
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <Link
-                  component="button"
-                  type="button"
-                  onClick={handleClickOpen}
-                  variant="body2"
-                  sx={{ alignSelf: "baseline" }}
-                >
-                  Forgot your password?
-                </Link>
-              </Box>
-              <TextField
-                value={password}
-                error={passwordError}
-                helperText={passwordErrorMessage}
-                name="password"
-                placeholder="••••••"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                required
-                fullWidth
-                variant="outlined"
-                color={passwordError ? "error" : "primary"}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormControl>
-
-            {/* Forgot password modal */}
-            <ForgotPassword open={open} handleClose={handleClose} />
-            {/* Sign in button */}
-            <Button type="submit" fullWidth variant="contained">
-              Sign in
-            </Button>
-            {/* Sign up link */}
-            <Typography sx={{ textAlign: "center" }}>
-              Don't have an account?{" "}
-              <span>
-                <Link
-                  href="/signup"
-                  variant="body2"
-                  sx={{ alignSelf: "center" }}
-                >
-                  Sign up
-                </Link>
-              </span>
-            </Typography>
-          </Box>
-          <Divider>or</Divider>
-          {/* Google sign in button */}
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => alert("Sign in with Google")}
-              startIcon={<GoogleIcon />}
+      <Box sx={{ }}>
+        <Stack
+          direction="column"
+          justifyContent="space-between"
+          sx={{
+            minHeight: "100%",
+            padding: { xs: 2, sm: 4 },
+            "&::before": {
+              content: '""',
+              display: "block",
+              position: "absolute",
+              zIndex: -1,
+              inset: 0,
+              backgroundImage:
+                "radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))",
+              backgroundRepeat: "no-repeat",
+            },
+          }}
+        >
+          <Card variant="outlined">
+            <Typography
+              component="h1"
+              variant="h4"
+              sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
             >
-              Sign in with Google
-            </Button>
-          </Box>
-        </Card>
-      </Stack>
+              Sign in
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+                gap: 2,
+              }}
+            >
+              {/* Email input field */}
+              <FormControl>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <TextField
+                  value={email}
+                  error={emailError}
+                  helperText={emailErrorMessage}
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="your@email.com"
+                  autoComplete="email"
+                  autoFocus
+                  required
+                  fullWidth
+                  variant="outlined"
+                  color={emailError ? "error" : "primary"}
+                  sx={{ ariaLabel: "email" }}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormControl>
+              {/* Password input field */}
+              <FormControl>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <Link
+                    component="button"
+                    type="button"
+                    onClick={handleClickOpen}
+                    variant="body2"
+                    sx={{ alignSelf: "baseline" }}
+                  >
+                    Forgot your password?
+                  </Link>
+                </Box>
+                <TextField
+                  value={password}
+                  error={passwordError}
+                  helperText={passwordErrorMessage}
+                  name="password"
+                  placeholder="••••••"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  required
+                  fullWidth
+                  variant="outlined"
+                  color={passwordError ? "error" : "primary"}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </FormControl>
+
+              {/* Forgot password modal */}
+              <ForgotPassword open={open} handleClose={handleClose} />
+              {/* Sign in button */}
+              <Button type="submit" fullWidth variant="contained">
+                Sign in
+              </Button>
+              {/* Sign up link */}
+              <Typography sx={{ textAlign: "center" }}>
+                Don't have an account?{" "}
+                <span>
+                  <Link
+                    href="/register"
+                    variant="body2"
+                    sx={{ alignSelf: "center" }}
+                  >
+                    Sign up
+                  </Link>
+                </span>
+              </Typography>
+            </Box>
+            <Divider>or</Divider>
+            {/* Google sign in button */}
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              <Button
+                fullWidth
+                variant="outlined"
+                onClick={() => alert("Sign in with Google")}
+                startIcon={<GoogleIcon />}
+              >
+                Sign in with Google
+              </Button>
+            </Box>
+          </Card>
+        </Stack>
+      </Box>
     </ThemeProvider>
   );
 }

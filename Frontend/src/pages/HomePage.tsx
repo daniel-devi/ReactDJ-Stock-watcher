@@ -1,8 +1,8 @@
-import Header from "../components/Homepage/Header";
-import Hero from "../components/Homepage/Hero";
-import Features from "../components/Homepage/Features";
-import CTA from "../components/Homepage/CTA";
-import FAQ from "../components/Homepage/FAQ";
+import Header from "../components/HomePage/Header";
+import Hero from "../components/HomePage/Hero";
+import Features from "../components/HomePage/Features";
+import CTA from "../components/HomePage/CTA";
+import FAQ from "../components/HomePage/FAQ";
 
 function HomePage() {
   return (
