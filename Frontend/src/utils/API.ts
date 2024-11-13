@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { ACCESS_TOKEN } from './CONSTANTS';
 
+// Define the base URL for the API
+const API_BASE_URL = 'http://127.0.0.1:8000/';
+
 // Gets the authentication token from localStorage
 const authToken = localStorage.getItem(ACCESS_TOKEN);
 
 // Create an Axios Api instance with the base URL from environment variables
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: API_BASE_URL, // Set the base URL from environment variables
   timeout: 10000, // Set a timeout of 10 seconds
   headers: {
     'Content-Type': 'application/json', // Default content type

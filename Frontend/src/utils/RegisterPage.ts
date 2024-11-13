@@ -23,12 +23,12 @@ export const validatePassword = (password: string): boolean =>
  */
 export const signUpUser = async (email: string, password: string): Promise<boolean> => {
   try {
-    await axios.post("http://localhost:8000/auth/register/", { email, password });
+    await axios.post("http://localhost:8000/account/register/", { email: email, password:password, username: ""});
     alert("Registration successful!");
     return true;
   } catch (error) {
     console.error("Registration error:", error);
-    alert("Registration failed. Please try again.");
+    alert(`Registration failed. Please try again.`);
     return false;
   }
 };

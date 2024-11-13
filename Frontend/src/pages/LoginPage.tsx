@@ -65,7 +65,7 @@ export default function LoginPage() {
       const usernameQuery = await fetchUsername(email);
       const username = usernameQuery;
 
-      const userDataQuery = await postUserDetail(username, password);
+      const userDataQuery = await postUserDetail(password, username);
       const data = userDataQuery;
 
       // Store the access token in local storage

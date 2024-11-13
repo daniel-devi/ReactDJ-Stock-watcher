@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, generate_username
 
 # Create your serializers here.
 
@@ -18,7 +18,8 @@ class UserModelSerializer(serializers.ModelSerializer):
         fields = ["id", "username", "password", "first_name", "last_name", "email", "date_joined"]
         extra_kwargs = {
             "password": {"write_only": True},  # Ensure password is write-only for security
-            "date_joined": {"read_only": True}  # Prevent modification of auto-generated date_joined field
+            "date_joined": {"read_only": True},  # Prevent modification of auto-generated date_joined field
+            "username": {"required": False},  # Allow username to be optional
         }
 
     def create(self, validated_data):
@@ -26,4 +27,6 @@ class UserModelSerializer(serializers.ModelSerializer):
         Create a new user with the provided validated data.
         Hashes the password before saving the user.
         """
+        if "username" not in validated_data:
+            validated_data["username"] = generate_username()
         return User.objects.create_user(**validated_data)

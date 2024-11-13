@@ -33,11 +33,12 @@ export const postUserDetail = async (
   userName: string
 ) => {
   // Send login request to server with username and password
-  const response = await API.post("/login", {
+  const response = await API.post("/login/", {
     username: userName,
     password: userPassword,
   });
-  return response.data.token;
+  console.log(response.data);
+  return response.data.access;
 };
 
 /**

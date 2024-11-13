@@ -7,8 +7,8 @@ import uuid
 class FavoriteStockModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    name = models.CharField(max_length=100)
-    price = models.FloatField()
+    name = models.CharField(max_length=100, unique=True)
+    code = models.CharField(max_length=10, unique=True,)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

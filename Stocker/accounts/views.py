@@ -6,6 +6,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 
 # Create your views here.
 
@@ -30,7 +31,8 @@ class RegisterAPIView(CreateAPIView):
 
 class UserListView(ListAPIView):
     serializer_class = UserModelSerializer
-    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    authentication_classes = []
+    permission_classes = [AllowAny]
     search_fields = ['username', 'email']
     ordering_fields = ['username', 'date_joined']
 

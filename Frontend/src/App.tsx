@@ -7,6 +7,7 @@ import SignUp from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import StockData from './pages/StockData'
+import Dashboard from './pages/Dashboard';
 
 /**
  * App component
@@ -26,6 +27,7 @@ function App() {
                 <Route path='/register' element={<SignUp/>} />
 
                 <Route path='/stock' element={<StockData/>} />
+                <Route path="/dashboard" element={< Dashboard/>} />
                 
                 {/* Define a route for the NotFoundPage */}
                 
