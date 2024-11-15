@@ -13,8 +13,9 @@ import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import { ThemeProvider } from "@mui/material/styles";
 // Custom components
-import ForgotPassword from "../components/ForgotPasswordForm";
-import { GoogleIcon } from "../components/CustomIcons";
+import ForgotPassword from "../components/LoginPage/ForgotPasswordForm";
+import { GoogleIcon } from "../components/LoginPage/CustomIcons";
+import DefaultCredentials from "../components/LoginPage/DefaultCredentials";
 import { theme } from "../utils/AppTheme";
 // Functions
 import {
@@ -117,7 +118,7 @@ export default function LoginPage() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ }}>
+      <Box sx={{}}>
         <Stack
           direction="column"
           justifyContent="space-between"
@@ -239,6 +240,7 @@ export default function LoginPage() {
                 Sign in with Google
               </Button>
             </Box>
+            <DefaultCredentials />
           </Card>
         </Stack>
       </Box>

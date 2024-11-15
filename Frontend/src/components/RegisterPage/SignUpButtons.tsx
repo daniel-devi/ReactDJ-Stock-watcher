@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Box } from "@mui/material";
-import { GoogleIcon } from "../CustomIcons";
+import { GoogleIcon } from "../LoginPage/CustomIcons";
 
 const SocialSignUpButtons: React.FC = () => (
   <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>

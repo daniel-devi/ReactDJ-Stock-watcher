@@ -5,6 +5,7 @@ import './main.css'
 import HomePage from './pages/HomePage';
 import SignUp from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
+import Logout from './pages/Logout';
 import NotFoundPage from './pages/NotFoundPage';
 import StockData from './pages/StockData'
 import Dashboard from './pages/Dashboard';
@@ -25,6 +26,8 @@ function App() {
                 {/* Authentication Routes */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path='/register' element={<SignUp/>} />
+                <Route path='/logout' element={<Logout/>} />
+
 
                 <Route path='/stock' element={<StockData/>} />
                 <Route path="/dashboard" element={< Dashboard/>} />

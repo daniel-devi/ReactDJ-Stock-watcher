@@ -1,15 +1,19 @@
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { Box } from "@mui/material";
 import Header from "../components/Header";
-import StockFavoritesApp from "../components/Testing";
+import StockFavoritesList from "../components/Dashboard/StockFavoritesList";
+import StockSearchForm from "../components/Dashboard/StockSearchForm";
 
 function Dashboard() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="bg-indigo-50">
-        <Header />
-      </div>
-      <StockFavoritesApp />
+      <Header />
+
+      <Box display="flex" flexDirection="column" gap={2}>
+        <StockFavoritesList />
+        <StockSearchForm />
+      </Box>
     </QueryClientProvider>
   );
 }

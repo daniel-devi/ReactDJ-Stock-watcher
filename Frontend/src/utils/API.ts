@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { ACCESS_TOKEN } from './CONSTANTS';
 
 // Define the base URL for the API
 const API_BASE_URL = 'http://127.0.0.1:8000/';
 
 // Gets the authentication token from localStorage
-const authToken = localStorage.getItem(ACCESS_TOKEN);
+const authToken = localStorage.getItem('token');
 
 // Create an Axios Api instance with the base URL from environment variables
 const API = axios.create({
