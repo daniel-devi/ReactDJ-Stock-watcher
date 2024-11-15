@@ -33,21 +33,18 @@ interface SearchResult {
   locale: string;
 }
 
-function convertToListOfLists(data: any) {
-  return data.map(item => Object.values(item));
-}
-
-
 
 /**
  * Fetches the list of favorite stocks from the backend
  * @async
- * @returns {Promise<string[]>} Array of stock symbols
+ * @returns {Promise} Array of stock symbols
  */
-const fetchFavorites = async (): Promise<[]> => {
+const fetchFavorites = async (): Promise<FavoriteStock[]> => {
   const response = await API.get<FavoriteStock[]>("/api/favorite-stocks");
   return response.data;
-};export default fetchFavorites;
+};
+
+export default fetchFavorites;
 
 /**
  * Adds a stock to the favorites list in the backend
