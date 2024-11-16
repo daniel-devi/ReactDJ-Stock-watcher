@@ -18,6 +18,7 @@ import {
 // Stock Search Form Component
 const StockSearchForm: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [trigger, setTrigger] = useState(false);
 
   /**
    * Creates a mutation hook for adding stocks to favorites
@@ -42,6 +43,7 @@ const StockSearchForm: React.FC = () => {
       user: Number(localStorage.getItem("UserId")) || "",
     };
     addToFavoritesMutation.mutate(favoriteData);
+    setTrigger((prev) => !prev); // Update state to cause a rerender
   };
   /**
    * Handles the search action
@@ -82,9 +84,11 @@ const StockSearchForm: React.FC = () => {
             {isSearching ? "Searching..." : "Search"}
           </Button>
         </Box>
-        {searchResults.length > 0 && (
+        {searchResults.length > 0 ? (
           <Box mt={2}>
-            <Box fontWeight="medium">Search Results:</Box>
+            <Box fontWeight="medium">Search Results:
+            <Button variant="contained" sx={{margin: '0 2px', color: 'red'}} >X</Button>
+            </Box>
             <List>
               {searchResults.map((stock: any, index: number) => (
                 <ListItem key={index} divider>
@@ -100,6 +104,11 @@ const StockSearchForm: React.FC = () => {
                       onClick={() =>
                         handleAddToFavorites(stock.ticker, stock.name)
                       }
+                      disabled={
+                        !checkStockCodeAlreadyExists(stock.ticker)
+                          ? false
+                          : true
+                      }
                     >
                       Add to Favorites
                     </Button>
@@ -110,6 +119,15 @@ const StockSearchForm: React.FC = () => {
                   )}
                 </ListItem>
               ))}
+            </List>
+          </Box>
+        ) : (
+          <Box mt={2}>
+            <Box fontWeight="medium">Search Results:</Box>
+            <List>
+              <ListItem divider>
+                <ListItemText primary="No results found." />
+              </ListItem>
             </List>
           </Box>
         )}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework.generics import ListAPIView, ListCreateAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from .models import *
 from .serialiser import *
@@ -34,3 +34,18 @@ class FavoriteStockCreateView(ListCreateAPIView):
     def get_queryset(self):
         queryset = FavoriteStockModel.objects.all().filter(user=self.request.user)
         return queryset
+    
+
+class FavoriteStockDeleteView(DestroyAPIView):
+        serializer_class = FavoriteStockModelSerializer
+        permission_classes = []
+
+        def get_object(self):
+             uuid = self.kwargs.get('uuid')
+             try:
+                return FavoriteStockModel.objects.get(uuid=uuid)
+
+             except FavoriteStockModel.DoesNotExist:
+                 return HttpResponse("Favorite Stock not found")
+             
+            

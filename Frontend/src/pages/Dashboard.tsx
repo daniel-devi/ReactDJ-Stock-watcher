@@ -10,9 +10,9 @@ function Dashboard() {
     <QueryClientProvider client={queryClient}>
       <Header />
 
-      <Box display="flex" flexDirection="column" gap={2}>
-        <StockFavoritesList />
+      <Box display="flex" flexDirection="column">
         <StockSearchForm />
+        <StockFavoritesList />
       </Box>
     </QueryClientProvider>
   );

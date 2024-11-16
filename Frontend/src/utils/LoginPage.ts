@@ -38,7 +38,9 @@ export const postUserDetail = async (
     password: userPassword,
   });
   // Return authentication token from server response
+  localStorage.setItem("refreshToken", response.data.refresh);
   return response.data.access;
+
 };
 
 /**
@@ -46,10 +48,11 @@ export const postUserDetail = async (
  * @returns {Promise<void>}
  * @throws {Error} If fetching user details fails
  */
-export const saveUserDetail = async () => {
+export const saveUserDetail =  async (): Promise<void> => {
   try {
     // Get user details from server
-    const response = await API.get("/account/detail");
+    const response =  await API.get("/account/detail");
+    console.log("Saved user details.......");
     // Store username and user ID in local storage for persistence
     localStorage.setItem("UserName", response.data.username);
     localStorage.setItem("UserId", response.data.id);

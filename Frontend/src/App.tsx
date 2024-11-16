@@ -8,7 +8,11 @@ import LoginPage from './pages/LoginPage';
 import Logout from './pages/Logout';
 import NotFoundPage from './pages/NotFoundPage';
 import StockData from './pages/StockData'
+import ProfilePage from './pages/ProfilePage';
 import Dashboard from './pages/Dashboard';
+
+// Import the AuthenticationRequired component
+import AuthenticationRequired from './hooks/AuthenticationRequired';
 
 /**
  * App component
@@ -27,10 +31,12 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path='/register' element={<SignUp/>} />
                 <Route path='/logout' element={<Logout/>} />
+                <Route path='/profile' element={<AuthenticationRequired page={<ProfilePage/>} />} />
+                
 
 
-                <Route path='/stock' element={<StockData/>} />
-                <Route path="/dashboard" element={< Dashboard/>} />
+                <Route path='/stock/:symbol' element={<StockData/>} />
+                <Route path="/dashboard" element={<AuthenticationRequired page={<Dashboard/>} />} />
                 
                 {/* Define a route for the NotFoundPage */}
                 

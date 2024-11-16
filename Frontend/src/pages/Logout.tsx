@@ -1,4 +1,4 @@
-import {Box, Button} from "@mui/material";
+import { Box, Button, Typography, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 function Logout() {
@@ -6,22 +6,58 @@ function Logout() {
 
     const handleLogout = () => {
         // Perform logout logic here
-        // For example, clear user session or token
-        // Redirect to login page or perform any other necessary actions
-        localStorage.removeItem('token');
-        localStorage.removeItem('UserId');
-        localStorage.removeItem('UserName');
+        localStorage.removeItem("token");
+        localStorage.removeItem("UserId");
+        localStorage.removeItem("UserName");
         navigate("/login");
-
     };
 
-  return (
-      <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center" height="100vh" width="100vw">
-        <div>Are you sure you want to logout?</div> 
-        <Button variant="contained" color="primary" onClick={handleLogout} sx={{margin: '5px'}}>Logout</Button>
-        <Button variant="contained" color="secondary" onClick={() => navigate("/")}>Cancel</Button>
-    </Box>
-  )
+    return (
+        <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            height="100vh"
+            width="100vw"
+            sx={{ backgroundColor: "#f4f6f8" }}
+        >
+          <Typography variant="h3" color="text.primary" gutterBottom>Stocker</Typography>
+            <Paper
+                sx={{
+                    padding: "20px 40px",
+                    borderRadius: "8px",
+                    boxShadow: 3,
+                    textAlign: "center",
+                    backgroundColor: "#fff",
+                    maxWidth: 400,
+                    width: "100%",
+                }}
+            >
+                <Typography variant="h6" color="text.primary" gutterBottom>
+                    Are you sure you want to logout?
+                </Typography>
+                <Box display="flex" justifyContent="center" gap={2}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleLogout}
+                        sx={{ padding: "10px 20px" }}
+                    >
+                        Logout
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        onClick={() => navigate("/")}
+                        sx={{ padding: "10px 20px" }}
+                    >
+                        Cancel
+                    </Button>
+                </Box>
+            </Paper>
+        </Box>
+    );
 }
 
-export default Logout
+export default Logout;

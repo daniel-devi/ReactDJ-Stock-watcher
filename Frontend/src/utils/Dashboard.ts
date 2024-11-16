@@ -1,13 +1,6 @@
 import API from "./API";
 import axios from "axios";
-
-/**
- * API configuration constants
- * POLYGON_API_KEY: Authentication key for Polygon.io API
- * POLYGON_BASE_URL: Base URL for Polygon.io tickers endpoint
- */
-const POLYGON_API_KEY = "dLepHY8FNSKm91PgFpahLMGbRLEGhboQ";
-const POLYGON_BASE_URL = "https://api.polygon.io/v3/reference/tickers";
+import { POLYGON_API_KEY, POLYGON_BASE_URL } from "./CONSTANT";
 
 /**
  * Interface representing a favorite stock in the system
@@ -44,10 +37,9 @@ interface SearchResult {
 const fetchFavorites = async (): Promise<FavoriteStock[]> => {
   // Fetch favorite stocks from the API
   const response = await API.get<FavoriteStock[]>("/api/favorite-stocks");
-  // Process the response data to collect ticker symbols
-  const stockCodes = collectTickers(response.data);
   // Store the processed stock codes in localStorage for future reference
-  localStorage.setItem("FavoriteStockCode", JSON.stringify(stockCodes));
+  localStorage.removeItem("FavoriteStockCode");
+  localStorage.setItem("FavoriteStockCode", JSON.stringify(response.data));
   return response.data;
 };
 
@@ -64,13 +56,13 @@ export default fetchFavorites;
  * @returns {Promise<void>}
  * @description Creates a new favorite stock entry in the backend database
  */
-const addFavoriteStock = async (favoriteStockData: object): Promise<void> => {
-  await API.post("/api/favorite-stocks/create", {
+const addFavoriteStock = async (favoriteStockData: {name: string, code: string, user: number}): Promise<void> => {
+  const response = await API.post("/api/favorite-stocks/create", {
     name: favoriteStockData.name,
     code: favoriteStockData.code,
     user: favoriteStockData.user,
   });
-collectTickers(favoriteStockData.code)
+  return response.data;
 };
 
 /**
@@ -90,6 +82,12 @@ const fetchStockSearchResults = async (searchTerm: string) => {
     },
   });
   return response.data.results;
+};
+
+
+const deleteFavoriteStock = async ( uuid: string): Promise<void> => {
+  await API.delete(`/api/favorite-stocks/delete/${uuid}/`);
+  console.log("Deleted");
 };
 
 /**
@@ -123,13 +121,14 @@ const formatSearchResults = (results: SearchResult[]): SearchResult[] => {
  */
 function collectTickers(arr: [object]): [] {
   // Create an empty array to hold the ticker values
-  let tickerList = [];
+  const tickerList = [];
 
   // Map through the array and collect ticker symbols
-  let updatedArr = arr.map((item) => {
+  const updatedArr = arr.map((item: object) => {
+    const typedItem = item as { ticker?: string };
     // Add the ticker to the ticker list if it exists
-    if (item.ticker) {
-      tickerList.push(item.ticker);
+    if (typedItem.ticker) {
+      tickerList.push(typedItem.ticker);
     }
     return item;
   });
@@ -152,13 +151,14 @@ function checkStockCodeAlreadyExists(stockCode: string): boolean {
   const jsonData = JSON.parse(favoriteStockCodes || "[]");
 
   // Check if the stock code exists in the parsed data
-  const itemFound = jsonData.some((item) => item.code === stockCode);
+  const itemFound = jsonData.some((item: {code: string}) => item.code === stockCode);
   return itemFound;
 }
 
 export {
   addFavoriteStock,
   fetchStockSearchResults,
+  deleteFavoriteStock,
   isValidStockSymbol,
   formatSearchResults,
   collectTickers,
