@@ -30,35 +30,49 @@
 
   1. Clone the repository
 
+```bash
+
   git clone https://github.com/daniel-devi/ReactDj-Stocker.git
   cd ReactDj-Stocker
 
-
+```
   2. Backend Setup
 
   # Navigate to backend directory
+  ``` bash
   cd stocker
+```
 
   # Install dependencies
+  ```bash
   pip install -r requirements.txt
+```
 
   # Run migrations
+  ```bash
   python manage.py migrate
+```
 
   # Start development server
+  ```bash
   python manage.py runserver
-
+```
 
   3. Frontend Setup
 
   # Navigate to frontend directory
+  ```bash
   cd frontend
+```
 
   # Install dependencies
+  ```bash
   npm install
-
+```
   # Start development server
+  ```bash
   npm run dev
+```
 
 
   ## Features
