@@ -74,7 +74,10 @@ export default function LoginPage() {
 
       // Store UserData
       saveUserDetail();
-      alert("Login successful!");
+
+      setTimeout(() => {
+        alert("Login successful!");
+      }, 3000);
 
       // Redirect to the home page
       navigate("/");

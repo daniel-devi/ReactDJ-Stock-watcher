@@ -37,7 +37,7 @@ export const postUserDetail = async (
     username: userName,
     password: userPassword,
   });
-  console.log(response.data);
+  // Return authentication token from server response
   return response.data.access;
 };
 

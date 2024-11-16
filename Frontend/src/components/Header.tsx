@@ -8,8 +8,7 @@ function Header() {
     const token: string | null = localStorage.getItem("token");
     if (token) {
       setIsLogin(true);
-      const storedUserName = localStorage.getItem("UserName");
-      setUserName(storedUserName || "");
+      setUserName(localStorage.getItem("UserName") || "");
     }
   };
 
